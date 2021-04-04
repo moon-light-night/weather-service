@@ -1,6 +1,6 @@
 # weather-app
 
-## Project vuew
+## Project view
 ```
 https://weather-app-glxmind.web.app/
 ```
