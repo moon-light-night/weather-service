@@ -2,9 +2,6 @@
   <div class="header">
     <div class="header__current-place" v-if="isVisible">
       <div class="header__places" v-if="this.weather">
-        <!-- <div class="header__places-city" v-if="this.weather === null">
-          Ваш город
-        </div> -->
         <div class="header__places-city">
           {{ this.weather.name }}
         </div>
@@ -24,7 +21,7 @@
         type="text"
         name=""
         id=""
-        placeholder="city"
+        placeholder="Введите город"
         v-model="query"
         class="header__search-field"
         @keypress="fetchWeather"
@@ -105,7 +102,7 @@ export default {
     },
     searchHandler() {
       return this.cities.filter((el) => {
-        return el.city.toLowerCase().includes(this.query)
+        return el.city.includes(this.query)
       })
     },
   },
@@ -178,7 +175,7 @@ export default {
   display: flex;
 }
 .header__places-change-city {
-  margin: 0 29px 0 0;
+  margin: 0 37px 0 0;
   font-size: 18px;
   line-height: 22px;
   color: white;
@@ -214,7 +211,7 @@ export default {
 .header__degrees-point {
   width: 8px;
   height: 22px;
-  margin: 0 9px 0 0;
+  margin: 7px 9px 0 0;
   background-image: url('~@/assets/degree-sign.png');
   background-size: 100% auto;
   background-repeat: no-repeat;
@@ -267,7 +264,8 @@ export default {
 }
 .header__citiesList {
   position: absolute;
-  top: 100px;
+  top: 60px;
+
   width: -webkit-fill-available;
   height: 200px;
   overflow: auto;
@@ -284,5 +282,81 @@ export default {
 .header__citiesList::-webkit-scrollbar-thumb {
   border-radius: 5px;
   background-color: #84caff;
+}
+
+@media (min-width: 730px) {
+  .header__places-change-city {
+    margin: 0 33px 0 0;
+  }
+  .header__degrees {
+    padding: 7px 0 0 0;
+    margin: 0 -4px 0px 0;
+  }
+  .header__citiesList {
+    top: 100px;
+  }
+}
+
+@media (max-width: 730px) {
+  .header {
+    margin: 0px 0 109px;
+  }
+  .header__places-city {
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .header__places-change-city {
+    font-size: 15px;
+    line-height: 18px;
+    padding: 0;
+  }
+  .header__places-my-place {
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .header__places-current-place {
+  }
+  .header__degrees {
+    position: absolute;
+    right: 6px;
+    top: 7px;
+  }
+  .header {
+    position: relative;
+  }
+  .header__places-city {
+    margin: 0 0 18px;
+  }
+  .header__search-field {
+    max-width: 332px;
+    min-width: 200px;
+    height: 53px;
+    z-index: 1;
+  }
+  .header__search-btn {
+    transform: translate(294px, 19px);
+    font-size: 15px;
+    line-height: 18px;
+    z-index: 2;
+  }
+  .header__search-box .header__search-field {
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .header__citiesList {
+    height: 150px;
+  }
+  .header__citiesList-p {
+    font-size: 15px;
+    line-height: 18px;
+  }
+}
+@media (max-width: 375px) {
+  .header__search-field {
+    width: 87vw;
+  }
+  .header__search-btn {
+    transform: translate(79vw, 19px);
+  }
 }
 </style>

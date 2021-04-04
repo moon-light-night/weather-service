@@ -113,9 +113,6 @@ nav,
 section {
   display: block;
 }
-html {
-  height: 100%;
-}
 body {
   line-height: 1;
 }
@@ -139,19 +136,11 @@ table {
   border-spacing: 0;
 }
 
-@media (min-width: 300px) {
+@media (max-width: 730px) {
   body {
     background-color: #7290b9 !important;
   }
   #app {
     margin: 19px auto 0 !important;
-  }
-}
-@media (min-width: 740px) {
-  body {
-    background-color: #498cec !important;
-  }
-  #app {
-    margin: 75px auto 0 !important;
   }
 }

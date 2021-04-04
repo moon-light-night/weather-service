@@ -6,11 +6,6 @@
         v-if="this.weather"
         :class="this.weather.weather[0].main"
       ></div>
-      <!-- <div class="body__view-img Clear" v-if="this.weather === null"></div> -->
-      <!-- <div class="body__view-degrees" v-if="this.weather === null">
-        19 &#176;
-      </div> -->
-
       <div class="body__view-degrees" v-if="this.weather && !this.metricId">
         {{ Math.round(this.weather.main.temp) }} &#176;
       </div>
@@ -29,9 +24,6 @@
         {{ Math.round((this.weather.main.temp * 9) / 5 + 32) }} &#176;
       </div>
     </div>
-    <!-- <div class="body__description" v-if="this.weather === null">
-      Преимущественно солнечно
-    </div> -->
     <div class="body__description" v-if="this.weather">
       {{ this.weather.weather[0].description }}
     </div>
@@ -57,7 +49,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 0 218px;
+  margin: 0 auto 218px;
 }
 .body__view {
   display: flex;
@@ -97,5 +89,39 @@ export default {
 }
 .Cloudy {
   background-image: url('~@/assets/Cloudy.png');
+}
+
+@media (min-width: 730px) {
+  .body {
+    margin: 0 auto 231px;
+  }
+  .body__view {
+    margin: 8px 0px 2px -49px;
+  }
+}
+
+@media (max-width: 730px) {
+  .body {
+    margin: 0 auto 150px;
+    min-width: 169px;
+  }
+  .body__view {
+    align-items: center;
+  }
+  .body__view-degrees {
+    font-size: 90px;
+    line-height: 155px;
+  }
+  .body__view-img {
+    width: 100px;
+    height: 100px;
+  }
+  .body__description {
+    font-size: 20px;
+    line-height: 0px;
+  }
+  .body__view {
+    margin: 0;
+  }
 }
 </style>

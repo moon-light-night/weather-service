@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -36,7 +35,6 @@ export default new Vuex.Store({
   },
   getters: {
     RETURN_WEATHER: (state) => state.weather,
-    // RETURN_WEATHER_ICON: (state) => state.weather[0].main,
     RETURN_METRIC_ID: (state) => state.metricId,
   },
 })

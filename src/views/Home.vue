@@ -25,9 +25,9 @@ export default {
 <style scoped>
 .home-wrap {
   max-width: 1190px;
-  height: 852px;
+  height: auto;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,5 +35,14 @@ export default {
 .home {
   width: 100%;
   height: 100%;
+}
+@media (max-width: 730px) {
+  .home {
+    width: 100%;
+  }
+  .home-wrap {
+    max-width: 321px;
+    height: auto;
+  }
 }
 </style>

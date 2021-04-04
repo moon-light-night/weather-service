@@ -1,0 +1,7 @@
+{
+  "hosting": {
+    "site": "weather-app-glxmind",
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+  }
+}
