@@ -9,7 +9,7 @@
           <button class="header__places-change-city" @click="showField">
             Сменить город
           </button>
-          <div class="header__places-my-place">
+          <div class="header__places-my-place" @click="defPosition">
             Мое местоположение
           </div>
         </div>
@@ -27,7 +27,7 @@
         @keypress="fetchWeather"
       />
       <div class="header__search-btn" @click="fetchWeather">
-        ОК
+        ОК{{ this.currentCity }}
       </div>
 
       <ul class="header__citiesList" v-if="this.query">
@@ -61,6 +61,9 @@ export default {
     query: '',
     isActive: true,
     cities: [],
+    coords: {},
+    latitude: '',
+    longitude: '',
   }),
   methods: {
     showField() {
@@ -85,13 +88,44 @@ export default {
       event.target.classList.add('active-f')
     },
     setQuery(event) {
-      console.log(event.target.id)
       this.query = event.target.id
+    },
+    defPosition() {
+      const context = this
+
+      async function foo() {
+        let options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0,
+        }
+        const ctx = context
+        await navigator.geolocation.getCurrentPosition(success, error, options)
+        function success(pos) {
+          let crd = pos.coords
+          ctx.coords.latitude = crd.latitude
+          ctx.coords.longitude = crd.longitude
+
+          console.log('Your current position is:')
+          console.log(`Latitude : ${crd.latitude}`)
+          console.log(`Longitude: ${crd.longitude}`)
+          console.log(`More or less ${crd.accuracy} meters.`)
+        }
+        function error(err) {
+          console.warn(`ERROR(${err.code}): ${err.message}`)
+        }
+        return 1
+      }
+
+      foo().then(
+        setTimeout(() => {
+          this.$store.dispatch('getPosition', this.coords)
+        }, 300)
+      )
     },
   },
   created() {
     this.cities = data
-    console.log(this.cities)
   },
   mounted() {
     this.$store.dispatch('getWeather', '%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0')
@@ -102,8 +136,14 @@ export default {
     },
     searchHandler() {
       return this.cities.filter((el) => {
-        return el.city.includes(this.query)
+        return (
+          el.city.includes(this.query) ||
+          el.city.toLowerCase().includes(this.query.toLowerCase())
+        )
       })
+    },
+    currentCity() {
+      return this.$store.getters['RETURN_CITY']
     },
   },
 }
@@ -192,6 +232,9 @@ export default {
   line-height: 22px;
   opacity: 0.6;
   font-weight: 300;
+}
+.header__places-my-place:hover {
+  cursor: pointer;
 }
 .header__places-my-place::before {
   content: '';
@@ -313,8 +356,6 @@ export default {
   .header__places-my-place {
     font-size: 15px;
     line-height: 18px;
-  }
-  .header__places-current-place {
   }
   .header__degrees {
     position: absolute;

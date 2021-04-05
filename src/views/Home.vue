@@ -14,6 +14,7 @@ import Body from '@/components/Body.vue'
 import Footer from '@/components/Footer.vue'
 
 export default {
+  data: () => ({}),
   components: {
     Header,
     Body,
