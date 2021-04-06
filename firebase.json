@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "weather-app-glx",
     "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }

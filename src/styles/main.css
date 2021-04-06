@@ -3,7 +3,7 @@ body {
   width: 100%;
   height: 100%;
   margin: 0;
-  background-color: #498cec;
+  background-color: #5a7498;
 }
 #app {
   height: auto;
@@ -137,9 +137,9 @@ table {
 }
 
 @media (max-width: 730px) {
-  body {
+  /* body {
     background-color: #7290b9 !important;
-  }
+  } */
   #app {
     margin: 19px auto 0 !important;
   }
