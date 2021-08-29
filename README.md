@@ -3,7 +3,7 @@
 ## Project view
 
 ```
-https://weather-app-glx.web.app
+https://weather-app-e7456.web.app
 ```
 
 ## Project setup
