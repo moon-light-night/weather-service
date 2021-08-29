@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="header__current-place" v-if="isVisible">
+    <div class="header__current-place" v-if="modalIsVisible">
       <div class="header__places" v-if="this.weather">
         <div class="header__places-city">
           {{ this.weather.name }}
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="header__search-box" v-if="!isVisible">
+    <div class="header__search-box" v-if="!modalIsVisible">
       <input
         type="text"
         name=""
@@ -26,10 +26,6 @@
         class="header__search-field"
         @keypress="fetchWeather"
       />
-      <div class="header__search-btn" @click="fetchWeather">
-        ОК{{ this.currentCity }}
-      </div>
-
       <ul class="header__citiesList" v-if="this.query">
         <li
           v-for="(item, i) in searchHandler"
@@ -45,9 +41,38 @@
 
     <div class="header__degrees">
       <div class="header__degrees-point"></div>
-      <div class="header__degrees-box" @click="submitId">
-        <div class="header__degrees-c" @click="addClassC" id="c">C</div>
-        <div class="header__degrees-f" @click="addClassF" id="f">F</div>
+      <div class="header__degrees-box" @click="handleDegree">
+        <input
+          type="radio"
+          class="custom-checkbox"
+          name="degree"
+          value="c"
+          id="c"
+          checked
+          v-model="currentDegree"
+        />
+        <label
+          for="c"
+          class="custom-checkbox-label"
+          :class="{ activeDegree: currentDegree === 'c' }"
+          style="border-radius: 7px 0 0 7px;"
+          >C</label
+        >
+        <input
+          type="radio"
+          class="custom-checkbox"
+          name="degree"
+          id="f"
+          value="f"
+          v-model="currentDegree"
+        />
+        <label
+          for="f"
+          class="custom-checkbox-label"
+          :class="{ activeDegree: currentDegree === 'f' }"
+          style="border-radius: 0 7px 7px 0;"
+          >F</label
+        >
       </div>
     </div>
   </div>
@@ -57,38 +82,32 @@
 import { data } from '../data/cities.js'
 export default {
   data: () => ({
-    isVisible: true,
     query: '',
     isActive: true,
     cities: [],
     coords: {},
     latitude: '',
     longitude: '',
+    currentDegree: 'c',
   }),
   methods: {
     showField() {
-      this.isVisible = false
+      this.$store.commit('closeModal')
       this.query = ''
     },
     fetchWeather(e) {
-      if (e.key == 'Enter' || e.type == 'click') {
+      if (e && e.key == 'Enter' && this.query) {
         this.$store.dispatch('getWeather', this.query)
-        this.isVisible = !this.isVisible
+        this.$store.commit('toggleModal')
       }
     },
-    submitId(event) {
-      this.$store.commit('setId', event.target.id)
+    handleDegree(event) {
+      this.$store.commit('setId', event.target.value)
     },
-    addClassC(event) {
-      document.querySelector('.header__degrees-f').classList.remove('active-f')
-      event.target.classList.add('active-c')
-    },
-    addClassF(event) {
-      document.querySelector('.header__degrees-c').classList.remove('active-c')
-      event.target.classList.add('active-f')
-    },
-    setQuery(event) {
-      this.query = event.target.id
+    async setQuery(event) {
+      await (this.query = event.target.id)
+      this.$store.dispatch('getWeather', this.query)
+      this.$store.commit('toggleModal')
     },
 
     defPosition() {
@@ -117,6 +136,9 @@ export default {
     this.$store.dispatch('getWeather', '%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0')
   },
   computed: {
+    modalIsVisible() {
+      return this.$store.getters['RETURN_MODALISVISIBLE']
+    },
     weather() {
       return this.$store.getters['RETURN_WEATHER']
     },

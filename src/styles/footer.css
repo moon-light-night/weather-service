@@ -1,7 +1,6 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  margin: 0 0 122px;
 }
 .footer__item {
   display: flex;
@@ -46,9 +45,9 @@
 }
 
 @media (min-width: 730px) {
-  .footer {
+  /* .footer {
     margin: 0px 0 122px 5px;
-  }
+  } */
 }
 
 @media (max-width: 365px) {

@@ -26,7 +26,7 @@ export default {
 <style scoped>
 .home-wrap {
   max-width: 1190px;
-  height: auto;
+  height: 100%;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
@@ -36,6 +36,9 @@ export default {
 .home {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 @media (max-width: 730px) {
   .home {

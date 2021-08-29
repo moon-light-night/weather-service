@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 218px;
 }
 .body__view {
   display: flex;
@@ -46,9 +45,6 @@
 }
 
 @media (min-width: 730px) {
-  .body {
-    margin: 0 auto 231px;
-  }
   .body__view {
     margin: 8px 0px 2px -49px;
   }

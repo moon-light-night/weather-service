@@ -9,6 +9,7 @@ export default new Vuex.Store({
     url: 'https://api.openweathermap.org/data/2.5',
     weather: null,
     metricId: '',
+    modalIsVisible: true,
     latitude: '',
     longitude: '',
     options: {
@@ -28,6 +29,12 @@ export default new Vuex.Store({
     setCity(state, city) {
       state.city = city
     },
+    toggleModal(state) {
+      state.modalIsVisible = !state.modalIsVisible
+    },
+    closeModal(state) {
+      state.modalIsVisible = false
+    }
   },
   actions: {
     async getWeather(ctx, query) {
@@ -84,5 +91,6 @@ export default new Vuex.Store({
     RETURN_WEATHER: (state) => state.weather,
     RETURN_METRIC_ID: (state) => state.metricId,
     RETURN_CITY: (state) => state.city,
+    RETURN_MODALISVISIBLE: (state) => state.modalIsVisible
   },
 })

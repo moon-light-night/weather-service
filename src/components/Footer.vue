@@ -1,9 +1,5 @@
 <template>
   <div class="footer">
-    <div class="footer__item" v-if="this.weather === null">
-      <div class="footer__item-name">Ветер</div>
-      <div class="footer__item-value">5 м/c, западный</div>
-    </div>
     <div class="footer__item" v-if="this.weather">
       <div class="footer__item-name">Ветер</div>
       <div class="footer__item-value">
@@ -12,10 +8,6 @@
       </div>
     </div>
 
-    <div class="footer__item" v-if="this.weather === null">
-      <div class="footer__item-name">Давление</div>
-      <div class="footer__item-value">752 мм рт. ст.</div>
-    </div>
     <div class="footer__item" v-if="this.weather">
       <div class="footer__item-name">Давление</div>
       <div class="footer__item-value">
@@ -23,22 +15,9 @@
       </div>
     </div>
 
-    <div class="footer__item" v-if="this.weather === null">
-      <div class="footer__item-name">Влажность</div>
-      <div class="footer__item-value">60%</div>
-    </div>
     <div class="footer__item" v-if="this.weather">
       <div class="footer__item-name">Влажность</div>
       <div class="footer__item-value">{{ this.weather.main.humidity }} %</div>
-    </div>
-
-    <div class="footer__item" v-if="this.weather === null">
-      <div class="footer__item-name">Вероятность дождя</div>
-      <div class="footer__item-value">10%</div>
-    </div>
-    <div class="footer__item" v-if="this.weather">
-      <div class="footer__item-name">Вероятность дождя</div>
-      <div class="footer__item-value">10%</div>
     </div>
   </div>
 </template>
